@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: k8sdeploy
+spec:
+  selector:
+    matchLabels:
+      app: k8sdeploy
+  replicas: 3 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: k8sdeploy
+    spec:
+      containers:
+        - name: k8sdeploy
+          image: k8sdeploy:3.0 # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent # try to fetch from dockerhub repo if locally not found
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
